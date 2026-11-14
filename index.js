@@ -1,9 +1,23 @@
 const { default: makeWASocket, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 const pino = require('pino');
 const ADMIN = '6283856559210@s.whatsapp.net';
+const BOT_NUMBER = '628131825436';
 async function start() {
 const { state, saveCreds } = await useMultiFileAuthState('session');
 const sock = makeWASocket({ auth: state, logger: pino({ level: 'silent' }), browser: ["Ubuntu", "Chrome", "20.0.04"] });
+sock.ev.on('creds.update', saveCreds);
+if (!state.creds.registered) {
+setTimeout(async () => {
+try {
+const code = await sock.requestPairingCode(BOT_NUMBER);
+console.log('PAIRING CODE KAMU: ' + code);
+} catch(e){ console.log('Gagal pairing, restart: ' + e.message) }
+}, 3000);
+}
+sock.ev.on('connection.update', (u) => {
+if (u.connection === 'open') console.log('✅ BROVER ONLINE!');
+if (u.connection === 'close') start();
+});
 sock.ev.on('creds.update', saveCreds);
 sock.ev.on('connection.update', (u) => {
 if (u.connection === 'open') console.log('✅ BROVER ONLINE!');
