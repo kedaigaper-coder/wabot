@@ -16,6 +16,7 @@ console.log('PAIRING CODE KAMU: ' + code);
 }
 sock.ev.on('connection.update', (u) => {
 if (u.connection === 'open') console.log('✅ BROVER ONLINE!');
+if (u.connection === 'close') start();
 });
 sock.ev.on('messages.upsert', async ({ messages }) => {
 const m = messages[0];
