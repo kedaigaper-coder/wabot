@@ -22,7 +22,7 @@ sock.ev.on('messages.upsert', async ({ messages }) => {
 const m = messages[0];
 if (!m.message || m.key.fromMe) return;
 const from = m.key.remoteJid;
-const senderNum = from.split('@')[0];
+const nomorPengirim = (m.key.senderPn || m.key.remoteJidAlt || m.key.senderAlt || dari).split('@')[0];
 const msg = m.message;
 const text = (msg.conversation || msg.extendedTextMessage?.text || msg.imageMessage?.caption || msg.videoMessage?.caption || '').trim();
 const lower = text.toLowerCase();
