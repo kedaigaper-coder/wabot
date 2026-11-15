@@ -35,7 +35,7 @@ if (msg.documentMessage) mediaType = 'DOKUMEN';
 if (isMedia && !msg.stickerMessage) {
 await sock.sendMessage(from, { text: mediaType + ' diterima kak, terima kasih! Sudah diteruskan ke admin Adebro. Mohon tunggu ya, admin akan segera hubungi kakak. Boleh kirim alamat lengkapnya juga ya kak.' });
 try {
-await sock.sendMessage(ADMIN, { text: '🔥 LEAD BARU ADEBRO! Dari: ' + senderNum + ' Jenis: ' + mediaType + ' Pesan: ' + (text || '(tanpa keterangan)') });
+await sock.sendMessage(ADMIN, { text: '🔥 LEAD BARU ADEBRO! Dari: ' + nomorPengirim + ' Jenis: ' + mediaType + ' Pesan: ' + (text || '(tanpa keterangan)') });
 await sock.sendMessage(ADMIN, { forward: m, forwardingScore: 1, isForwarded: true });
 } catch(e){}
 return;
@@ -58,7 +58,7 @@ return;
 }
 if (lower === '4' || lower.includes('admin') || lower.includes('orang')) {
 await sock.sendMessage(from, { text: 'Siap kak, admin Adebro sudah saya hubungi. Mohon tunggu sebentar ya, admin akan segera chat kakak. Terima kasih!' });
-try { await sock.sendMessage(ADMIN, { text: '⚠️ MINTA ADMIN! Dari: ' + senderNum + ' Pesan: ' + text }); } catch(e){}
+try { await sock.sendMessage(ADMIN, { text: '⚠️ MINTA ADMIN! Dari: ' + nomorPengirim + ' Pesan: ' + text }); } catch(e){}
 return;
 }
 await sock.sendMessage(from, { text: 'Hallo kak, saya BROVER asisten tim Adebro. Ada yang bisa dibantu?\n\nKetik:\n1 - Layanan & Harga\n2 - Cara Order\n3 - Alamat\n4 - Chat Admin\n\nAtau langsung kirim Foto / Video lokasi / bangunannya ya kak!' });
